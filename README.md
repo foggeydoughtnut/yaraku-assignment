@@ -17,3 +17,8 @@ Sometimes you may want to completely rebuild your Sail images to ensure all of t
 ## Accessing web server
 
 Once the container is running, the Laravel instance can be found at `http://localhost`
+
+## Local dev
+
+Start up the container using the following command: `./vendor/bin/sail up`  
+Run `npm run dev` to start `vite` to see changes that you make on the frontend reflected on `localhost`
