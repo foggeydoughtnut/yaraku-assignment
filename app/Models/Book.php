@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Book extends Model
 {
     use HasFactory;
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
       'title',
@@ -18,6 +20,6 @@ class Book extends Model
     //
     public function authors(): BelongsToMany
     {
-        return $this->belongsToMany(Author::class);
+        return $this->belongsToMany(Author::class, 'author_book')->withTimestamps();
     }
 }
