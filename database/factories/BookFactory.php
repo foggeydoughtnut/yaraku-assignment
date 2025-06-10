@@ -18,7 +18,7 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => Str::uuid(),
+            'id' => Str::uuid7(),
             'title' => fake()->text(20),
         ];
     }

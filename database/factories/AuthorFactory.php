@@ -18,7 +18,7 @@ class AuthorFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => Str::uuid(),
+            'id' => Str::uuid7(),
             'name' => fake()->name(),
         ];
     }
