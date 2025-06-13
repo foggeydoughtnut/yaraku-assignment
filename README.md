@@ -22,3 +22,10 @@ Once the container is running, the Laravel instance can be found at `http://loca
 
 Start up the container using the following command: `./vendor/bin/sail up`  
 Run `npm run dev` to start `vite` to see changes that you make on the frontend reflected on `localhost`
+
+Refresh mainDB: ` ./vendor/bin/sail php artisan migrate:refresh --seed`
+
+### Testing
+
+Migrate test table: `./vendor/bin/sail php artisan migrate --env=testing`  
+Run tests: `./vendor/bin/sail php artisan test --env=testing`
