@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Book extends Model
 {
     use HasFactory;
+    protected $table = 'books';
     protected $keyType = 'string';
     public $incrementing = false;
 
@@ -20,6 +21,6 @@ class Book extends Model
     //
     public function authors(): BelongsToMany
     {
-        return $this->belongsToMany(Author::class, 'author_book')->withTimestamps();
+        return $this->belongsToMany(Author::class, 'author_book', 'book_id', 'author_id')->withTimestamps();
     }
 }

@@ -10,6 +10,7 @@ class Author extends Model
 {
     use HasFactory;
     
+    protected $table = 'authors';
     protected $keyType = 'string';
     public $incrementing = false;
 
@@ -19,6 +20,6 @@ class Author extends Model
 
     public function books(): BelongsToMany
     {
-        return $this->belongsToMany(Book::class, 'author_book')->withTimestamps();
+        return $this->belongsToMany(Book::class, 'author_book', 'author_id', 'book_id')->withTimestamps();
     }
 }
