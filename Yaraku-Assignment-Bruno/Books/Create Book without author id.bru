@@ -1,0 +1,18 @@
+meta {
+  name: Create Book without author id
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/books
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "authorName": "New Author",
+    "bookName": "New Book"
+  }
+}
