@@ -27,12 +27,14 @@ class BookRequest extends FormRequest
                 'string',
             ],
             'authorName' => [
-                'required',
                 'string',
+                'required_without:authorId'
             ],
             'authorId' => [
-              'string'
+                'string',
+                'required_without:authorName'
             ]
+            
         ];
     }
 }
