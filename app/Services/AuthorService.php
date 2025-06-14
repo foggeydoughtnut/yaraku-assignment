@@ -25,7 +25,7 @@ class AuthorService {
    * @param string $id Id of author to get
    * @return Author
    */
-  public function show(string $id): Author {
+  public function show(string $id): Author|null {
     $author = Author::find($id);
     return $author;
   }

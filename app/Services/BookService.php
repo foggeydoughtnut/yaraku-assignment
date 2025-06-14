@@ -26,7 +26,7 @@ class BookService {
    * @param string $id Id of book to get
    * @return Book
    */
-  public function show(string $id): Book {
+  public function show(string $id): Book|null {
     $book = Book::with('authors')->find($id);
     return $book;
   }
