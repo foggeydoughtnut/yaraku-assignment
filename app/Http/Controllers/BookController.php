@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Services\AuthorService;
 use App\Services\BookService;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -15,8 +16,18 @@ class BookController extends Controller
     /**
      * Display a listing of books.
      */
-    public function index(int $limit=1000)
+    public function index(Request $request)
     {
+        $limit = 1000;
+        $limitFromQuery = $request->query('limit');
+        if ($limitFromQuery) {
+            if (is_array($limitFromQuery)) {
+                $limit = intval($limitFromQuery[0]);
+            } else {
+                $limit = intval($limitFromQuery);
+            }            
+        }
+        
         $books = $this->bookService->index($limit);
         return $books;
     }
