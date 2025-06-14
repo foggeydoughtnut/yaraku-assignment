@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Http\Requests\AuthorRequest;
 use App\Models\Author;
 use App\Services\AuthorService;
-use Illuminate\Database\Eloquent\Collection;
 
 class AuthorController extends Controller
 {
@@ -16,8 +15,19 @@ class AuthorController extends Controller
     /**
      * Get a listing of the resource.
      */
-    public function index(int $limit=1000): Collection
+    public function index(Request $request)
     {
+        $limit = 1000;
+        $limitFromQuery = $request->query('limit');
+        if ($limitFromQuery) {
+            if (is_array($limitFromQuery)) {
+                $limit = intval($limitFromQuery[0]);
+            } else {
+                $limit = intval($limitFromQuery);
+            }            
+        }
+        
+
         $authors = $this->authorService->index($limit);
         return $authors; 
     }
@@ -34,18 +44,30 @@ class AuthorController extends Controller
     /**
      * Get the specified resource.
      */
-    public function show(string $id): Author
+    public function show(string $id)
     {
         $author = $this->authorService->show($id);
-        return $author;  
+        if (!$author) {
+            return response()->json([
+                'message' => 'No author found',
+                'status' => 'error',
+            ], 404);
+        }
+        return $author;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(AuthorRequest $request, string $id): Author
+    public function update(AuthorRequest $request, string $id)
     {
         $newAuthor = $this->authorService->update($id, $request->name);
+        if (!$newAuthor) {
+            return response()->json([
+                'message' => 'Failed to update author',
+                'status' => 'error',
+            ], 404);
+        }
         return $newAuthor;
     }
 }

@@ -1,0 +1,15 @@
+meta {
+  name: Delete Book
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{url}}/api/books/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 01976c6e-646a-7399-90c9-f3133a234ca4
+}

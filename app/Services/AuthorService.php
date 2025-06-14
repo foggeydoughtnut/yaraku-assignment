@@ -25,7 +25,7 @@ class AuthorService {
    * @param string $id Id of author to get
    * @return Author
    */
-  public function show(string $id): Author {
+  public function show(string $id): Author|null {
     $author = Author::find($id);
     return $author;
   }
@@ -36,10 +36,12 @@ class AuthorService {
    * @param string $name Updated name
    * @return Author
    */
-  public function update(string $id, string $name): Author {
+  public function update(string $id, string $name) {
     $author = Author::find($id);
-    $author->name = $name;
-    $author->save();
+    if ($author) {
+      $author->name = $name;
+      $author->save();
+    }
     return $author;
   }
   /**

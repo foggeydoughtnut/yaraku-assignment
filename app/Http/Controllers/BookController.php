@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Services\AuthorService;
 use App\Services\BookService;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -15,8 +16,18 @@ class BookController extends Controller
     /**
      * Display a listing of books.
      */
-    public function index(int $limit=1000)
+    public function index(Request $request)
     {
+        $limit = 1000;
+        $limitFromQuery = $request->query('limit');
+        if ($limitFromQuery) {
+            if (is_array($limitFromQuery)) {
+                $limit = intval($limitFromQuery[0]);
+            } else {
+                $limit = intval($limitFromQuery);
+            }            
+        }
+        
         $books = $this->bookService->index($limit);
         return $books;
     }
@@ -31,10 +42,16 @@ class BookController extends Controller
         $author = null;
         if ($request->authorId) {
             $author = $this->authorService->show($request->authorId);
-        }
-        if (!$author) {
+            if (!$author){
+                return response()->json([
+                    'message' => 'No author with the given author id',
+                    'status' => 'error',
+                ], 404);
+            }
+        } else {
             $author = $this->authorService->store($request->authorName);
         }
+        
 
         $book = $this->bookService->store($request->bookName, [$author->id]);
         return $book;
@@ -46,6 +63,16 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $result = $this->bookService->destroy($id);
-        return $result;
+        if ($result === 1) {
+            return response()->json([
+                'message' => 'Success',
+                'status' => 'success',
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'Failed to delete book',
+            'status' => 'error',
+        ], 404);
+
     }
 }
