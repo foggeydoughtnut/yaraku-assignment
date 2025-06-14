@@ -31,10 +31,16 @@ class BookController extends Controller
         $author = null;
         if ($request->authorId) {
             $author = $this->authorService->show($request->authorId);
-        }
-        if (!$author) {
+            if (!$author){
+                return response()->json([
+                    'message' => 'No author with the given author id',
+                    'status' => 'error',
+                ], 404);
+            }
+        } else {
             $author = $this->authorService->store($request->authorName);
         }
+        
 
         $book = $this->bookService->store($request->bookName, [$author->id]);
         return $book;
@@ -46,6 +52,16 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $result = $this->bookService->destroy($id);
-        return $result;
+        if ($result === 1) {
+            return response()->json([
+                'message' => 'Success',
+                'status' => 'success',
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'Failed to delete book',
+            'status' => 'error',
+        ], 404);
+
     }
 }
