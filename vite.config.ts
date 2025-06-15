@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
@@ -33,5 +34,9 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
+  },
+  test: {
+    // ... Specify options here.
+    globals: true,
   },
 });
