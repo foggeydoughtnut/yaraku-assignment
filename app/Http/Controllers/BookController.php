@@ -53,7 +53,7 @@ class BookController extends Controller
         }
         
 
-        $book = $this->bookService->store($request->bookName, [$author->id]);
+        $book = $this->bookService->store($request->title, [$author->id]);
         return $book;
     }
     
