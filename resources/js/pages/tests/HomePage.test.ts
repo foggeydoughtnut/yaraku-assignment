@@ -1,5 +1,3 @@
-// @vitest-environment jsdom
-
 import { createTestingPinia } from '@pinia/testing';
 import { mount } from '@vue/test-utils';
 import { expect, test } from 'vitest';
