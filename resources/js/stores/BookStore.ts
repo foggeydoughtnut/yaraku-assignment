@@ -14,6 +14,16 @@ export const useBookStore = defineStore('book', () => {
     triggerRef(books);
   };
 
+  const readBook = async (id: string) => {
+    if (id) {
+      const bookResult = await api.books.get(id);
+      if (bookResult.id) {
+        books.value.set(bookResult.id, bookResult);
+        triggerRef(books);
+      }
+    }
+  };
+
   const createBook = async (title: string, authorInfo: { authorId: string } | { authorName: string }) => {
     let newBook: Book | undefined;
     if ('authorId' in authorInfo) {
@@ -22,14 +32,7 @@ export const useBookStore = defineStore('book', () => {
       newBook = await api.books.create(title, { authorName: authorInfo.authorName });
     }
     if (newBook) {
-      // console.log('new book', newBook);
-      // books.value.set(newBook.id, newBook);
-      // triggerRef(books);
-
-      // TODO call api.books.read(newBook.id);
-      // then update the store with that result instead of doing the reinitialize
-
-      await initialize();
+      await readBook(newBook.id);
     }
   };
 
@@ -39,5 +42,5 @@ export const useBookStore = defineStore('book', () => {
     triggerRef(books);
   };
 
-  return { books, initialize, createBook, deleteBook };
+  return { books, initialize, createBook, deleteBook, readBook };
 });

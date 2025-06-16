@@ -86,6 +86,18 @@ export const useAPI = () => {
         return data;
       },
       /**
+       * @param id The id of the book you would like to get
+       * @returns The book associated with the id
+       */
+      get: async (id: string): Promise<Book> => {
+        const response = await fetch(`${URL}/api/books/${id}`);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+      },
+      /**
        *
        * @param title The title of the new book
        * @param authorInfo Uses either the authorId passed in, or it will create a new author with a name of the passed in value for authorName
