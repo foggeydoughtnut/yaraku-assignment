@@ -6,6 +6,7 @@ import { createPinia } from 'pinia';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
+import { initializeStorePlugin } from './plugins/initializeStores';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -16,6 +17,7 @@ createInertiaApp({
     const pinia = createPinia();
     createApp({ render: () => h(App, props) })
       .use(pinia)
+      .use(initializeStorePlugin)
       .use(plugin)
       .use(ZiggyVue)
       .mount(el);
