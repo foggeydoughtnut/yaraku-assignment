@@ -2,6 +2,7 @@ import { useAPI } from '@/composables/useAPI';
 import { Author } from '@/types';
 import { defineStore } from 'pinia';
 import { shallowRef, triggerRef } from 'vue';
+import { useBookStore } from './BookStore';
 
 const api = useAPI();
 export const useAuthorStore = defineStore('author', () => {
@@ -37,6 +38,9 @@ export const useAuthorStore = defineStore('author', () => {
       const result = await api.authors.update(id, updatedName);
       authors.value.set(result.id, result);
       triggerRef(authors);
+
+      const bookStore = useBookStore();
+      await bookStore.initialize();
     }
   };
 
