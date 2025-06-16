@@ -69,14 +69,14 @@ const handleAddBook = async (title: string, authorInfo: Author | string) => {
   </div>
   <EditAuthorDialog
     v-if="activeAuthor"
-    :show="activeAuthor !== undefined"
+    :show-edit-author-form="activeAuthor !== undefined"
     :author="activeAuthor"
     @update-author="handleAuthorEdit"
     @cancel="activeAuthor = undefined"
   />
   <AddBookDialog
     v-if="showAddBookForm"
-    :show="showAddBookForm"
+    :show-add-book-form="showAddBookForm"
     :authors="authorStore.authors.values().toArray()"
     @create-book="handleAddBook"
     @cancel="showAddBookForm = false"

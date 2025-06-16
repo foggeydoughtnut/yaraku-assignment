@@ -5,6 +5,7 @@ import { ref, toRefs } from 'vue';
 
 const props = defineProps<{
   authors: Author[];
+  showAddBookForm: boolean;
 }>();
 
 const { authors } = toRefs(props);
@@ -31,7 +32,7 @@ const handleSave = (event: Event) => {
 </script>
 
 <template>
-  <TransitionRoot appear as="template">
+  <TransitionRoot :show="showAddBookForm" appear as="template">
     <Dialog as="div" @close="emit('cancel')" class="relative z-10">
       <TransitionChild
         as="template"
