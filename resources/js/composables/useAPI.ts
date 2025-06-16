@@ -126,7 +126,7 @@ export const useAPI = () => {
         id: string,
       ): Promise<{
         message: string;
-        status: string;
+        status: 'success' | 'warning' | 'error';
       }> => {
         const response = await fetch(`${URL}/api/books/${id}`, {
           method: 'DELETE',
