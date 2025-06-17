@@ -28,4 +28,7 @@ Refresh mainDB: ` ./vendor/bin/sail php artisan migrate:refresh --seed`
 ### Testing
 
 Migrate test table: `./vendor/bin/sail php artisan migrate --env=testing`  
-Run tests: `./vendor/bin/sail php artisan test --env=testing`
+Run tests:
+
+- Backend: `./vendor/bin/sail php artisan test --env=testing`
+- Frontend: `npm run test`
