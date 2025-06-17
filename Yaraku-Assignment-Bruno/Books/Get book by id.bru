@@ -1,0 +1,15 @@
+meta {
+  name: Get book by id
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/api/books/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 01976785-e46a-73bc-b28c-c6f60f4ecc27
+}

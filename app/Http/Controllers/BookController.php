@@ -33,6 +33,20 @@ class BookController extends Controller
     }
 
     /**
+     * Get the specified resource.
+     */
+    public function show(string $id)
+    {
+        $book = $this->bookService->show($id);
+        if (!$book) {
+            return response()->json(data: [
+                'message' => 'No book found',
+                'status' => 'error',
+            ], status: 404);
+        }
+        return $book;
+    }
+    /**
      * Store a newly created resource in storage.
      * Either
      */
@@ -53,7 +67,7 @@ class BookController extends Controller
         }
         
 
-        $book = $this->bookService->store($request->bookName, [$author->id]);
+        $book = $this->bookService->store($request->title, [$author->id]);
         return $book;
     }
     

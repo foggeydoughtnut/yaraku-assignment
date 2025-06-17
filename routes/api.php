@@ -10,5 +10,5 @@ Route::apiResource('authors', AuthorController::class)->only([
 ]);
 
 Route::apiResource('books', BookController::class)->only([
-    'index', 'store', 'destroy'
+    'index', 'store', 'show', 'destroy'
 ]);
