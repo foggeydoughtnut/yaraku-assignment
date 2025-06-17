@@ -25,8 +25,6 @@ const handleSave = (event: Event) => {
     emit('createBook', title.value, selectedAuthor.value);
   } else if (title.value && authorInput.value) {
     emit('createBook', title.value, authorInput.value);
-  } else {
-    console.log('Need author');
   }
 };
 </script>
@@ -78,12 +76,13 @@ const handleSave = (event: Event) => {
                     v-model="authorInput"
                     placeholder="New Author"
                     title="New Author Name"
+                    required
                   />
                 </fieldset>
                 <div class="divider mt-4 mb-2">OR</div>
                 <fieldset class="fieldset">
                   <legend class="fieldset-legend">Pick an existing author</legend>
-                  <select :disabled="authorInput !== ''" class="select" v-model="selectedAuthor">
+                  <select required :disabled="authorInput !== ''" class="select" v-model="selectedAuthor">
                     <option disabled selected>Pick an Author</option>
                     <option v-for="author in authors" :key="author.id" :value="author">{{ author.name }}</option>
                   </select>
