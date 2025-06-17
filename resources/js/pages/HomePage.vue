@@ -5,6 +5,7 @@ import BookTable from '@/components/BookTable.vue';
 import EditAuthorDialog from '@/components/EditAuthorDialog.vue';
 import ExportDataDialog from '@/components/ExportDataDialog.vue';
 import { useCSVExport } from '@/composables/useCSVExport';
+import { useXMLExport } from '@/composables/useXMLExport';
 import { useAuthorStore } from '@/stores/AuthorStore';
 import { useBookStore } from '@/stores/BookStore';
 import { Author } from '@/types';
@@ -42,6 +43,8 @@ const handleExport = (
 ) => {
   if (exportType === 'csv') {
     useCSVExport(columnsToExport);
+  } else {
+    useXMLExport(columnsToExport);
   }
 
   showExportDialog.value = false;

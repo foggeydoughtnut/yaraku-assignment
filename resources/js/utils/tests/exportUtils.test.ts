@@ -1,7 +1,7 @@
 import { beforeEach } from 'node:test';
 import { describe, expect, test, vi } from 'vitest';
 import { downloadFile } from '../downloadFile';
-import { generateCSV } from '../exportUtils';
+import { generateCSV, generateXML } from '../exportUtils';
 
 describe('exportUtils tests', () => {
   beforeEach(() => {
@@ -32,6 +32,20 @@ describe('exportUtils tests', () => {
       );
       expect(downloadFile).toHaveBeenCalled();
       expect(downloadFile).toHaveBeenCalledWith('column 1,column 2\ntest1,test2\ntest3,test4', 'csv');
+    });
+  });
+
+  describe('genenerateXML tests', () => {
+    test('It calls downloadFile with the xml type', () => {
+      generateXML([]);
+      expect(downloadFile).toHaveBeenCalled();
+      expect(downloadFile).toHaveBeenCalledWith('<root/>', 'xml');
+    });
+
+    test('It calls downloadFile with the expected data', () => {
+      generateXML([{ testing: 'test' }]);
+      expect(downloadFile).toHaveBeenCalled();
+      expect(downloadFile).toHaveBeenCalledWith('<root><data-point><testing>test</testing></data-point></root>', 'xml');
     });
   });
 });

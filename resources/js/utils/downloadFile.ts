@@ -3,13 +3,13 @@ export const downloadFile = (data: BlobPart, type: 'csv' | 'xml') => {
   if (type === 'csv') {
     blob = new Blob([data], { type: 'text/csv' });
   } else {
-    blob = undefined;
+    blob = new Blob([data], { type: 'text/plain' });
   }
   if (blob) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'data.csv';
+    a.download = type === 'csv' ? 'data.csv' : 'data.xml';
     a.click();
   }
 };
