@@ -6,14 +6,6 @@ export const useXMLExport = (columnsToExport: { author: boolean; book: boolean }
   const bookStore = useBookStore();
   const authorStore = useAuthorStore();
 
-  const columns: ('author' | 'book')[] = [];
-  if (columnsToExport.book) {
-    columns.push('book');
-  }
-  if (columnsToExport.author) {
-    columns.push('author');
-  }
-
   const data: Record<string, string>[] = [];
   if (columnsToExport.book && columnsToExport.author) {
     for (const book of bookStore.books.values()) {

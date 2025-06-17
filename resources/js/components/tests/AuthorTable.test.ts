@@ -39,7 +39,7 @@ describe('AuthorTable tests', () => {
     expect(header).toBeDefined();
     const columnEls = header.findAll('th');
     expect(columnEls.length).toBe(2);
-    expect(columnEls.at(0)?.text()).toBe('Author Name');
+    expect(columnEls.at(0)?.text()).toBe('Author');
   });
 
   it('emits author on edit button click', async () => {

@@ -6,7 +6,7 @@ export const generateCSV = (columns: string[], data: string[][]) => {
   for (const row of data) {
     csvData.push(row.join(','));
   }
-  const result: BlobPart = csvData.join('\n');
+  const result = csvData.join('\n');
   downloadFile(result, 'csv');
 };
 
