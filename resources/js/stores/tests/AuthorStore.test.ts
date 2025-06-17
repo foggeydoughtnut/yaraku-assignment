@@ -39,6 +39,9 @@ describe('Author Store', () => {
             create: vi.fn().mockResolvedValue(testingAuthors[1]),
             update: vi.fn().mockResolvedValue(testingAuthors[2]),
           },
+          books: {
+            getAll: vi.fn().mockResolvedValue([]),
+          },
         }),
       };
     });
