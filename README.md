@@ -11,11 +11,14 @@ This is the README for the Yaraku coding assignment.
 - Clone the repo. (These steps assume you have `laravel`, `composer`, and `php` installed)
 - Run `cp .env.example .env`
 - Run `npm install` and `npm run build`
-- Run `composer install`.
+- Run `composer install`
 - Run `php artisan key:generate`
+- Ensure Docker is running
 - Run `./vendor/bin/sail up --build`
 - With the container running now run the migrations in a separate shell: `./vendor/bin/sail php artisan migrate`
   From there you should now be able to navigate to `http://localhost` to see the UI
+
+> Note: If you get an error that Docker is not running, then you will need to add your current user to the docker group before running again. You will know the user is in the `docker` group if you can successfully run `docker ps`
 
 ## Running the container
 
@@ -41,8 +44,8 @@ Run `npm run dev` to start `vite` to see changes that you make on the frontend r
 ## Testing
 
 - Run `cp .env.testing.example .env.testing`
-- Generate app key using `php artisan key:generate --show` and copy that output and set that value to be the `APP_KEY`.
-- Start up the container: `./vendor/bin/sail up`.
+- Generate app key using `php artisan key:generate --show` and copy that output and set that value to be the `APP_KEY` in `.env.testing`
+- Start up the container: `./vendor/bin/sail up`
 - Migrate test table: `./vendor/bin/sail php artisan migrate --env=testing`
 
 Run tests:
